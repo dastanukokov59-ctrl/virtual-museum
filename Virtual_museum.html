@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Виртуальный музей</title>
+    <!-- Подключаем стили Pannellum для 360° панорамы -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css"/>
+    <!-- Подключаем наши стили -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Навигация -->
+    <header class="site-header">
+        <div class="container header-container">
+            <div class="logo">МУЗЕЙ 360°</div>
+            <nav class="nav-menu">
+                <a href="#home">Главная</a>
+                <a href="#panorama-section">Панорама</a>
+                <a href="#catalog-section">Экспонаты</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Главный экран (Hero) -->
+    <section id="home" class="hero-section">
+        <div class="container hero-content">
+            <h1>ВИРТУАЛЬНЫЙ МУЗЕЙ</h1>
+            <p>Исследуйте музей в формате 360° и нажимайте на экспонаты, чтобы узнать больше.</p>
+            <a href="#panorama-section" class="btn-primary">Начать экскурсию</a>
+        </div>
+    </section>
+
+    <!-- Секция панорамы -->
+    <section id="panorama-section" class="panorama-section">
+        <div class="container">
+            <h2 class="section-title">Интерактивный зал</h2>
+            <p class="section-subtitle">Кликайте по точкам на панораме, чтобы изучить экспонаты</p>
+            <div id="panorama"></div>
+        </div>
+    </section>
+
+    <!-- Каталог экспонатов -->
+    <section id="catalog-section" class="catalog-section">
+        <div class="container">
+            <h2 class="section-title">Экспонаты</h2>
+            <p class="section-subtitle">Полный каталог музейной коллекции</p>
+            <div class="catalog-grid" id="catalogGrid">
+                <!-- Карточки генерируются динамически из script.js -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Всплывающее модальное окно -->
+    <div id="exhibitModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" id="modalClose">&times;</button>
+            <div class="modal-body">
+                <div class="modal-img-container">
+                    <img id="modalImg" src="" alt="Экспонат">
+                    <span id="modalBadge" class="modal-badge">Экспонат №1</span>
+                </div>
+                <div class="modal-info">
+                    <h3 id="modalTitle">Название экспоната</h3>
+                    <p id="modalDate" class="modal-date">Период</p>
+                    <p id="modalDesc" class="modal-desc">Описание экспоната...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Футер -->
+    <footer class="site-footer">
+        <div class="container">
+            <p>Виртуальный музей · 2026</p>
+        </div>
+    </footer>
+
+    <!-- Подключаем скрипт Pannellum -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
+    <!-- Подключаем наш скрипт -->
+    <script src="script.js"></script>
+</body>
+</html>
