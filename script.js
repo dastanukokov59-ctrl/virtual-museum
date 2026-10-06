@@ -166,20 +166,8 @@ document.addEventListener("DOMContentLoaded", () => {
     /* ==========================================================
        ИНИЦИАЛИЗАЦИЯ ПАНОРАМЫ PANNELLUM
        ========================================================== */
-    const hotspots = exhibits.map(exhibit => {
-        return {
-            pitch: exhibit.pitch,
-            yaw: exhibit.yaw,
-            type: "info",
-            text: `Экспонат №${exhibit.id}`,
-            clickHandlerFunc: () => openModal(exhibit),
-            // Создаем кастомный элемент точки
-            createTooltipFunc: hotSpotDiv => {
-                hotSpotDiv.classList.add("pannelum-hotspot-custom");
-                hotSpotDiv.innerText = exhibit.id;
-            }
-        };
-    });
+    /* Точки на панораме убраны по вашему запросу */
+    const hotspots = [];
 
     pannellum.viewer('panorama', {
         "type": "equirectangular",
