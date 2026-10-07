@@ -1,4 +1,6 @@
-/* Общие стили и переменные */
+/* ==========================================================
+   ОБЩИЕ СТИЛИ И ПЕРЕМЕННЫЕ
+   ========================================================== */
 :root {
     --bg-color: #0b0b0f;
     --card-bg: #14141c;
@@ -6,7 +8,7 @@
     --accent-color: #d4af37; /* Элегантный золотистый */
     --accent-hover: #e6c555;
     --text-primary: #f3f3f6;
-    --text-secondary: #9ba1a6;
+    --text-secondary: #c0c6cc; /* Сделали второстепенный текст светлее для читаемости */
     --border-color: #2a2a38;
     --transition: all 0.3s ease;
 }
@@ -90,7 +92,7 @@ body {
     text-align: center;
 }
 
-/* Многослойный градиент для плавного перехода от фото к черному фону музея внизу */
+/* Многослойный градиент для плавного перехода */
 .hero-overlay {
     position: absolute;
     top: 0;
@@ -118,33 +120,34 @@ body {
     max-width: 900px;
 }
 
-/* Специальная подложка под верхний текст для идеальной читаемости */
+/* Подложка под верхний текст */
 .hero-title-box {
-    background: rgba(11, 11, 15, 0.65);
+    background: rgba(11, 11, 15, 0.75);
     backdrop-filter: blur(12px);
-    border: 1px solid rgba(212, 175, 55, 0.2);
+    border: 1px solid rgba(212, 175, 55, 0.3);
     padding: 35px 40px;
     border-radius: 20px;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
     animation: fadeInDown 0.8s ease;
 }
 
 .hero-title-box h1 {
-    font-size: 3.5rem; /* Размер текста */
-    font-weight: bold; /* Жирность */
-    color: #ffffff !important; /* Белый цвет текста */
-    letter-spacing: 2px; /* Расстояние между буквами */
-    
-    /* Глубокая тень для читаемости + фиолетовое свечение */
+    font-size: 3.5rem;
+    font-weight: bold;
+    color: #ffffff !important;
+    letter-spacing: 2px;
     text-shadow: 0 4px 15px rgba(0, 0, 0, 0.9), 
                  0 0 30px rgba(138, 43, 226, 0.6) !important;
 }
 
+/* Улучшенный подзаголовок — сделали крупнее и заметнее */
 .hero-title-box p {
-    font-size: 1.15rem;
-    color: var(--text-secondary);
-    max-width: 650px;
-    margin: 0 auto;
+    font-size: 1.3rem; /* Увеличено для видимости */
+    font-weight: 500;
+    color: #f0f0f5; /* Сделано ярче */
+    max-width: 700px;
+    margin: 15px auto 0 auto;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9); /* Добавлена тень для читаемости */
 }
 
 /* Кнопка входа в музей снизу */
@@ -205,8 +208,9 @@ body {
 }
 
 #panorama {
-    width: 100%;
-    height: 600px;
+    width: 100% !important;
+    height: 75vh !important; /* Растянутая панорама */
+    min-height: 450px;
     border-radius: 16px;
     overflow: hidden;
     border: 1px solid var(--border-color);
@@ -246,15 +250,17 @@ body {
 .card-img-wrapper {
     position: relative;
     width: 100%;
-    height: 200px;
+    height: 220px;
     overflow: hidden;
-    background-color: #1a1a24;
+    background-color: #111; /* Темный фон для правильного отображения */
 }
 
+/* Фото экспонатов видны полностью без обрезки */
+.catalog-card img, 
 .card-img-wrapper img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain !important; 
     transition: var(--transition);
 }
 
@@ -368,14 +374,17 @@ body {
 
 .modal-img-container {
     position: relative;
-    background-color: #1a1a24;
+    background-color: #111;
     min-height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .modal-img-container img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
 }
 
 .modal-badge {
@@ -428,30 +437,8 @@ body {
     background-color: #08080c;
 }
 
-/* Стили точек на панораме Pannellum */
-.pannelum-hotspot-custom {
-    background-color: var(--accent-color);
-    border: 2px solid #fff;
-    border-radius: 50%;
-    width: 30px;
-    height: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    font-size: 12px;
-    color: #0b0b0f;
-    cursor: pointer;
-    box-shadow: 0 0 10px rgba(212, 175, 55, 0.8);
-    transition: transform 0.2s;
-}
-
-.pannelum-hotspot-custom:hover {
-    transform: scale(1.2);
-}
-
 /* Адаптивность под телефоны */
-@media (max-width: 768px) {
+@media screen and (max-width: 768px) {
     .header-container {
         flex-direction: column;
         height: auto;
@@ -460,7 +447,11 @@ body {
     }
     
     .hero-title-box h1 {
-        font-size: 2.1rem;
+        font-size: 2.1rem !important;
+    }
+
+    .hero-title-box p {
+        font-size: 1.05rem !important;
     }
 
     .hero-title-box {
@@ -468,7 +459,12 @@ body {
     }
 
     #panorama {
-        height: 400px;
+        height: 60vh !important;
+    }
+
+    .catalog-grid {
+        grid-template-columns: 1fr !important;
+        padding: 10px;
     }
 
     .modal-body {
@@ -478,44 +474,5 @@ body {
     .modal-img-container {
         height: 220px;
         min-height: auto;
-    }
-}
-/* ==========================================================
-   АДАПТАЦИЯ ДЛЯ ТЕЛЕФОНОВ И РАСТЯГИВАНИЕ ПАНОРАМЫ
-   ========================================================== */
-
-/* 1. Растягиваем блок панорамы, чтобы она казалась шире и просторнее */
-#panorama {
-    width: 100% !important;
-    height: 75vh !important; /* Делаем панораму выше/шире на экранах */
-    min-height: 450px;
-}
-
-/* 2. Делаем так, чтобы фото экспонатов в карточках были видны полностью (без обрезки) */
-.catalog-card img, 
-.card-img-wrapper img {
-    width: 100%;
-    height: 220px;
-    object-fit: contain !important; /* Главное свойство: фото вписывается целиком, не обрезаясь */
-    background-color: #111; /* Темный фон по бокам, если фото квадратное или вертикальное */
-}
-
-/* 3. Мобильная адаптация (для экранов телефонов уже 768px) */
-@media screen and (max-width: 768px) {
-    /* Уменьшаем слишком крупный заголовок на смартфонах, чтобы он не вылезал */
-    .hero h1 {
-        font-size: 2.2rem !important;
-        letter-spacing: 1px;
-    }
-
-    /* Делаем сетку каталога в один столбец, чтобы карточки были крупными и аккуратными */
-    #catalogGrid {
-        grid-template-columns: 1fr !important;
-        padding: 10px;
-    }
-
-    /* Настраиваем панораму для телефонов */
-    #panorama {
-        height: 60vh !important;
     }
 }
