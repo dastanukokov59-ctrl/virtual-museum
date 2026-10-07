@@ -145,38 +145,42 @@ const exhibits = [
    ========================================================== */
 document.addEventListener("DOMContentLoaded", () => {
     const catalogGrid = document.getElementById("catalogGrid");
-
-    exhibits.forEach(exhibit => {
-        const card = document.createElement("div");
-        card.className = "catalog-card";
-        card.innerHTML = `
-            <div class="card-img-wrapper">
-                <img src="${exhibit.image}" alt="${exhibit.title}" onerror="this.src='https://via.placeholder.com/400x300?text=Экспонат+${exhibit.id}'">
-                <span class="card-badge">№${exhibit.id}</span>
-            </div>
-            <div class="card-content">
-                <h3>${exhibit.title}</h3>
-                <p>${exhibit.description}</p>
-            </div>
-        `;
-        card.addEventListener("click", () => openModal(exhibit));
-        catalogGrid.appendChild(card);
-    });
+    
+    if (catalogGrid) {
+        exhibits.forEach(exhibit => {
+            const card = document.createElement("div");
+            card.className = "catalog-card";
+            card.innerHTML = `
+                <div class="card-img-wrapper">
+                    <img src="${exhibit.image}" alt="${exhibit.title}" onerror="this.src='https://via.placeholder.com/400x300?text=Экспонат+${exhibit.id}'">
+                    <span class="card-badge">№${exhibit.id}</span>
+                </div>
+                <div class="card-content">
+                    <h3>${exhibit.title}</h3>
+                    <p>${exhibit.description}</p>
+                </div>
+            `;
+            card.addEventListener("click", () => openModal(exhibit));
+            catalogGrid.appendChild(card);
+        });
+    }
 
     /* ==========================================================
        ИНИЦИАЛИЗАЦИЯ ПАНОРАМЫ PANNELLUM
        ========================================================== */
-    /* Точки на панораме убраны по вашему запросу */
-    const hotspots = [];
+    const panoramaContainer = document.getElementById("panorama");
+    if (panoramaContainer && typeof pannellum !== 'undefined') {
+        const hotspots = [];
 
-    pannellum.viewer('panorama', {
-        "type": "equirectangular",
-        "panorama": "panorama.jpg",
-        "autoLoad": true,
-        "compass": false,
-        "hfov": 110,
-        "hotSpots": hotspots
-    });
+        pannellum.viewer('panorama', {
+            "type": "equirectangular",
+            "panorama": "panorama.jpg",
+            "autoLoad": true,
+            "compass": false,
+            "hfov": 110,
+            "hotSpots": hotspots
+        });
+    }
 });
 
 /* ==========================================================
@@ -191,36 +195,45 @@ const modalDate = document.getElementById("modalDate");
 const modalDesc = document.getElementById("modalDesc");
 
 function openModal(exhibit) {
-    modalImg.src = exhibit.image;
-    modalImg.onerror = function() {
-        this.src = `https://via.placeholder.com/600x400?text=Экспонат+${exhibit.id}`;
-    };
-    modalBadge.innerText = `Экспонат №${exhibit.id}`;
-    modalTitle.innerText = exhibit.title;
-    modalDate.innerText = exhibit.date;
-    modalDesc.innerText = exhibit.description;
+    if (!modal) return;
+    
+    if (modalImg) {
+        modalImg.src = exhibit.image;
+        modalImg.onerror = function() {
+            this.src = `https://via.placeholder.com/600x400?text=Экспонат+${exhibit.id}`;
+        };
+    }
+    if (modalBadge) modalBadge.innerText = `Экспонат №${exhibit.id}`;
+    if (modalTitle) modalTitle.innerText = exhibit.title;
+    if (modalDate) modalDate.innerText = exhibit.date;
+    if (modalDesc) modalDesc.innerText = exhibit.description;
     
     modal.classList.add("active");
     document.body.style.overflow = "hidden"; // Блокируем скролл страницы под модалкой
 }
 
 function closeModal() {
+    if (!modal) return;
     modal.classList.remove("active");
     document.body.style.overflow = "auto";
 }
 
-modalClose.addEventListener("click", closeModal);
+if (modalClose) {
+    modalClose.addEventListener("click", closeModal);
+}
 
 // Закрытие по клику вне модального окна
-modal.addEventListener("click", (e) => {
-    if (e.target === modal) {
-        closeModal();
-    }
-});
+if (modal) {
+    modal.addEventListener("click", (e) => {
+        if (e.target === modal) {
+            closeModal();
+        }
+    });
+}
 
 // Закрытие по клавише Escape
 document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && modal.classList.contains("active")) {
+    if (e.key === "Escape" && modal && modal.classList.contains("active")) {
         closeModal();
     }
 });
