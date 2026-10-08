@@ -10,7 +10,7 @@ const exhibits = [
         description: "Суретте шығыс архитектурасы үлгісінде нақышталған, күмбезі мен мұнаралары бар, ортасында сағаты орнатылған бірегей сәндік туынды.",
         image: "exhibit1.jpg",
         pitch: 0,
-        yaw: -120 // Координаты точки на панораме (настраиваются)
+        yaw: -120
     },
     {
         id: 2,
@@ -138,7 +138,7 @@ const exhibits = [
         pitch: -5,
         yaw: 100
     },
-     {
+    {
         id: 16,
         title: "Экспонат №16: Аңшы мен барс",
         date: "Орта ғасырлар",
@@ -150,7 +150,7 @@ const exhibits = [
 ];
 
 /* ==========================================================
-   ИНИЦИАЛИЗАЦИЯ КАТАЛОГА КАРТОЧЕК
+   ИНИЦИАЛИЗАЦИЯ КАТАЛОГА КАРТОЧЕК И ПАНОРАМЫ
    ========================================================== */
 document.addEventListener("DOMContentLoaded", () => {
     const catalogGrid = document.getElementById("catalogGrid");
@@ -176,10 +176,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /* ==========================================================
        ИНИЦИАЛИЗАЦИЯ ПАНОРАМЫ PANNELLUM
-       ========================================================== 
-const panoramaContainer = document.getElementById("panorama");
+       ========================================================== */
+    const panoramaContainer = document.getElementById("panorama");
     if (panoramaContainer && typeof pannellum !== 'undefined') {
-        const hotspots = [];
+        // Автоматически формируем точки из массива exhibits
+        const hotspots = exhibits.map(exhibit => ({
+            "pitch": exhibit.pitch,
+            "yaw": exhibit.yaw,
+            "type": "info",
+            "text": exhibit.title,
+            "clickHandlerFunc": () => openModal(exhibit)
+        }));
 
         pannellum.viewer('panorama', {
             "type": "equirectangular",
@@ -222,7 +229,7 @@ function openModal(exhibit) {
     if (modalDesc) modalDesc.innerText = exhibit.description;
     
     modal.classList.add("active");
-    document.body.style.overflow = "hidden"; // Блокируем скролл страницы под модалкой
+    document.body.style.overflow = "hidden";
 }
 
 function closeModal() {
@@ -235,7 +242,6 @@ if (modalClose) {
     modalClose.addEventListener("click", closeModal);
 }
 
-// Закрытие по клику вне модального окна
 if (modal) {
     modal.addEventListener("click", (e) => {
         if (e.target === modal) {
@@ -244,7 +250,6 @@ if (modal) {
     });
 }
 
-// Закрытие по клавише Escape
 document.addEventListener("keydown", (e) => {
     if (e.key === "Escape" && modal && modal.classList.contains("active")) {
         closeModal();
