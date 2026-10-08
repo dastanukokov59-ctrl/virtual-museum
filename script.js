@@ -177,24 +177,23 @@ document.addEventListener("DOMContentLoaded", () => {
     /* ==========================================================
        ИНИЦИАЛИЗАЦИЯ ПАНОРАМЫ PANNELLUM
        ========================================================== 
-    const panoramaContainer = document.getElementById("panorama");
+       const panoramaContainer = document.getElementById("panorama");
 if (panoramaContainer && typeof pannellum !== 'undefined') {
-    const hotspots = [];
-    pannellum.viewer('panorama', {
-        "type": "equirectangular",
-        "panorama": "panorama.jpg",
-        "autoLoad": true,
-        "compass": false,
-        "hfov": 80,              // Начальный угол обзора
-        "minHfov": 50,           // Минимальный зум (защита от "мыла")
-        "maxHfov": 100,          // Максимальный зум
-        // --- ВЕРТИКАЛЬНЫЕ ОГРАНИЧЕНИЯ ---
-        "minPitch": -40,         // Насколько низко можно смотреть (вниз от горизонта)
-        "maxPitch": 40,          // Насколько высоко можно смотреть (вверх от горизонта)
-        // ---------------------------------
-        "hotSpots": hotspots
-    });
-}
+	const hotspots = [];
+
+	pannellum.viewer('panorama', {
+		"type": "equirectangular",
+		"panorama": "panorama.jpg",
+		"autoLoad": true,
+		"compass": false,
+		"hfov": 80,
+		"minHfov": 50,
+		"maxHfov": 100,
+		"minPitch": -40,
+		"maxPitch": 40,
+		"hotSpots": hotspots
+	});
+}    
 });
 
 /* ==========================================================
