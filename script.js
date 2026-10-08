@@ -180,7 +180,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const panoramaContainer = document.getElementById("panorama");
 if (panoramaContainer && typeof pannellum !== 'undefined') {
     const hotspots = [];
-
     pannellum.viewer('panorama', {
         "type": "equirectangular",
         "panorama": "panorama.jpg",
