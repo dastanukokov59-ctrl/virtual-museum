@@ -179,7 +179,6 @@ document.addEventListener("DOMContentLoaded", () => {
        ========================================================== */
     const panoramaContainer = document.getElementById("panorama");
     if (panoramaContainer && typeof pannellum !== 'undefined') {
-        // Автоматически формируем точки из массива exhibits
         const hotspots = exhibits.map(exhibit => ({
             "pitch": exhibit.pitch,
             "yaw": exhibit.yaw,
