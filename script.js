@@ -152,9 +152,8 @@ document.addEventListener("DOMContentLoaded", () => {
             "hfov": 80,
             "minHfov": 50,
             "maxHfov": 100,
-            "minPitch": -50,
-            "maxPitch": 50,
-            "hotSpots": hotspots
+            "minPitch": -70,
+            "maxPitch": 70,
         });
     }
 });
