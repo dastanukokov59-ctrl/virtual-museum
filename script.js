@@ -152,8 +152,8 @@ document.addEventListener("DOMContentLoaded", () => {
             "hfov": 80,
             "minHfov": 50,
             "maxHfov": 100,
-            "minPitch": -70,
-            "maxPitch": 70,
+            "minPitch": -65,
+            "maxPitch": 65,
         });
     }
 });
