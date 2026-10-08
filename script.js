@@ -177,23 +177,23 @@ document.addEventListener("DOMContentLoaded", () => {
     /* ==========================================================
        ИНИЦИАЛИЗАЦИЯ ПАНОРАМЫ PANNELLUM
        ========================================================== 
-       const panoramaContainer = document.getElementById("panorama");
-if (panoramaContainer && typeof pannellum !== 'undefined') {
-	const hotspots = [];
+const panoramaContainer = document.getElementById("panorama");
+    if (panoramaContainer && typeof pannellum !== 'undefined') {
+        const hotspots = [];
 
-	pannellum.viewer('panorama', {
-		"type": "equirectangular",
-		"panorama": "panorama.jpg",
-		"autoLoad": true,
-		"compass": false,
-		"hfov": 80,
-		"minHfov": 50,
-		"maxHfov": 100,
-		"minPitch": -40,
-		"maxPitch": 40,
-		"hotSpots": hotspots
-	});
-}    
+        pannellum.viewer('panorama', {
+            "type": "equirectangular",
+            "panorama": "panorama.jpg",
+            "autoLoad": true,
+            "compass": false,
+            "hfov": 80,
+            "minHfov": 50,
+            "maxHfov": 100,
+            "minPitch": -40,
+            "maxPitch": 40,
+            "hotSpots": hotspots
+        });
+    }
 });
 
 /* ==========================================================
