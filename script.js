@@ -1,7 +1,3 @@
-/* ==========================================================
-   НАСТРОЙКИ ЭКСПОНАТОВ
-   Здесь вы можете легко менять название, дату, описание и фото.
-   ========================================================== */
 const exhibits = [
     {
         id: 1,
@@ -149,12 +145,8 @@ const exhibits = [
     }
 ];
 
-/* ==========================================================
-   ИНИЦИАЛИЗАЦИЯ КАТАЛОГА КАРТОЧЕК И ПАНОРАМЫ
-   ========================================================== */
 document.addEventListener("DOMContentLoaded", () => {
     const catalogGrid = document.getElementById("catalogGrid");
-    
     if (catalogGrid) {
         exhibits.forEach(exhibit => {
             const card = document.createElement("div");
@@ -174,9 +166,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    /* ==========================================================
-       ИНИЦИАЛИЗАЦИЯ ПАНОРАМЫ PANNELLUM
-       ========================================================== */
     const panoramaContainer = document.getElementById("panorama");
     if (panoramaContainer && typeof pannellum !== 'undefined') {
         const hotspots = exhibits.map(exhibit => ({
@@ -202,9 +191,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
-/* ==========================================================
-   УПРАВЛЕНИЕ МОДАЛЬНЫМ ОКНОМ
-   ========================================================== */
 const modal = document.getElementById("exhibitModal");
 const modalClose = document.getElementById("modalClose");
 const modalImg = document.getElementById("modalImg");
@@ -215,7 +201,6 @@ const modalDesc = document.getElementById("modalDesc");
 
 function openModal(exhibit) {
     if (!modal) return;
-    
     if (modalImg) {
         modalImg.src = exhibit.image;
         modalImg.onerror = function() {
@@ -226,7 +211,6 @@ function openModal(exhibit) {
     if (modalTitle) modalTitle.innerText = exhibit.title;
     if (modalDate) modalDate.innerText = exhibit.date;
     if (modalDesc) modalDesc.innerText = exhibit.description;
-    
     modal.classList.add("active");
     document.body.style.overflow = "hidden";
 }
